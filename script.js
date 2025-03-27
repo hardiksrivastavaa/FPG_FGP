@@ -242,9 +242,21 @@ document.getElementById("branch").addEventListener("change", () => {
 
 document.getElementById("yearSem").addEventListener("change", populateSubjects);
 
-document
-  .getElementById("generateBtn")
-  .addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent form submission
-    generateFrontPage(); // Call the function to generate the PDF
-  });
+document.getElementById("form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  let formData = {
+    branch: document.getElementById("branch").value,
+    yearSem: document.getElementById("yearSem").value,
+    subjects: document.getElementById("subjects").value,
+    nameInput: document.getElementById("nameInput").value,
+  };
+
+  generateFrontPage();
+
+  fetch("https://script.google.com/macros/s/AKfycbxvmWfPRAOPv0fKh6T89oauk-_SHNnHngxrVGLVp_G2D4Ris-GUQWIKk1qhNq_bRPiSUg/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  }).catch(error => console.error("Error:", error));
+});
