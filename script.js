@@ -248,7 +248,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
     branch: document.getElementById("branch").value,
     yearSem: document.getElementById("yearSem").value,
     subjects: document.getElementById("subjects").value,
-    nameInput: document.getElementById("nameInput").value,
+    nameInput: document.getElementById("nameInput").value.trim(),
   };
 
   generateFrontPage();
