@@ -253,7 +253,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
   generateFrontPage();
 
-  fetch("https://script.google.com/macros/s/AKfycbxvmWfPRAOPv0fKh6T89oauk-_SHNnHngxrVGLVp_G2D4Ris-GUQWIKk1qhNq_bRPiSUg/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzKHTp21jc4HwsTI7JckJVJ30aC9FAuC82zQQhTHrjaTSvXP_P-s9yfBD6AKQjfodJXNg/exec", {
     method: "POST",
     mode: "no-cors",
     headers: { "Content-Type": "application/json" },
