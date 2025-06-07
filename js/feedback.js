@@ -5,15 +5,20 @@ const closeBtn = document.getElementById("closeModal");
 const thankYouMessage = document.getElementById("thankYouMessage");
 const closeThankYouBtn = document.getElementById("closeThankYou");
 const form = document.forms["feedbackForm"];
+const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
+
 
 // Show modal when page loads
 window.addEventListener("DOMContentLoaded", () => {
-    modal.classList.remove("hidden");
-    gsap.fromTo(
-        modalContent,
-        { opacity: 0, scale: 0.85, y: -30 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }
-    );
+    if (!hasSeenModal) {
+        modal.classList.remove("hidden");
+        gsap.fromTo(
+            modalContent,
+            { opacity: 0, scale: 0.85, y: -30 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }
+        );
+        sessionStorage.setItem("feedbackModalSeen", "true");
+    }
 });
 
 // Modal close animation
@@ -49,13 +54,6 @@ closeThankYouBtn.addEventListener("click", () => {
     });
 });
 
-// Close modal on outside click
-// window.addEventListener("click", (e) => {
-//     if (e.target === modal) {
-//         gsap.to(modalContent, hideModalAnimation);
-//     }
-// });
-
 // Form submit with silent Google Script POST
 const scriptURL = "https://script.google.com/macros/s/AKfycbwTjOig6S_11GS1_zcL0sMwuzxOBIlYgelsyd6vFgxIz3-e1SYctm75mk-DYwpKIQA_Xg/exec";
 
@@ -82,3 +80,11 @@ form.addEventListener("submit", (e) => {
         console.error("Submission Error!", error.message);
     });
 });
+
+
+// Close modal on outside click
+// window.addEventListener("click", (e) => {
+//     if (e.target === modal) {
+//         gsap.to(modalContent, hideModalAnimation);
+//     }
+// });
