@@ -20,6 +20,7 @@
 
 <body
     class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-700 flex items-center justify-center min-h-screen p-3 transition-colors duration-300">
+    <!-- bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500  -->
     <!-- Front Page Generator -->
     <div id="FPG" class="max-w-4xl w-full">
         <form id="frontPageForm" class="bg-white p-8 rounded-xl shadow-2xl">
@@ -42,12 +43,8 @@
                     <option value="CSE">Computer Science & Engineering</option>
                     <option value="IT">Information Technology</option>
                     <option value="IC">Instrumentation & Control</option>
-                    <option value="MOM">
-                        Modern Office Management and Secretarial Practice
-                    </option>
-                    <option value="PGDCA">
-                        Post Graduate Diploma in Computer Application
-                    </option>
+                    <option value="MOM">Modern Office Management and Secretarial Practice</option>
+                    <option value="PGDCA">Post Graduate Diploma in Computer Application</option>
                 </select>
             </div>
 
@@ -225,6 +222,22 @@
             </div>
         </div>
     </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+        <div class="bg-white p-6 rounded-xl shadow-lg text-center w-[90%] max-w-md">
+            <h2 class="text-2xl font-bold text-yellow-600 mb-2">Sorry for the Inconvenience</h2>
+            <p class="text-gray-700">
+                Something went wrong while generating the front page.<br />
+                We're working to fix this issue — please try again shortly.
+            </p>
+            <button onclick="closeErrorModal()"
+                class="mt-4 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+                Okay, Got It
+            </button>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="./js/helper.js"></script>

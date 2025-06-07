@@ -31,6 +31,15 @@ const handleDropdownChange = () => {
   populateTeachers();
 };
 
+const showErrorModal = () => {
+  document.getElementById("errorModal").classList.remove("hidden");
+}
+
+const closeErrorModal = () => {
+  document.getElementById("errorModal").classList.add("hidden");
+}
+
+
 // Event listener to submit form and generate front page PDF
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -41,7 +50,13 @@ form.addEventListener("submit", async (e) => {
     nameInput: document.getElementById("nameInput").value.trim()
   };
 
-  generateFrontPage();
+  try {
+    await generateFrontPage();
+  } catch (error) {
+    console.error("Front Page Generation Failed:", error);
+    showErrorModal();
+    return;
+  }
 
   fetch(
     "https://script.google.com/macros/s/AKfycbzKHTp21jc4HwsTI7JckJVJ30aC9FAuC82zQQhTHrjaTSvXP_P-s9yfBD6AKQjfodJXNg/exec",
@@ -85,30 +100,26 @@ const generateFrontPage = async () => {
 
   const pageWidth = page.getWidth();
 
+  // Adjust name and enrollment positions based on page width
   const nameX = pageWidth - timesRomanFont.widthOfTextAtSize(studentName, 23) - 20;
   const enrollmentX = pageWidth - timesRomanFont.widthOfTextAtSize(studentEnrollment, 21) - 20;
 
-  await drawText(page, `${studentEnrollment}`, enrollmentX, yPositions.enrollmentY, 21, [0, 0, 0], timesRomanFont);
-  await drawText(page, `${studentName}`, nameX, yPositions.nameY, 23, [0, 0, 0], timesRomanFont);
+  // Adjust font sizes
+  let branchFontSize = adjustFontSize(branch, timesRomanFont, pageWidth);
+  let subjectFontSize = adjustFontSize(subject, timesRomanBoldFont, pageWidth);
+
+  // Branch, Year & Sem, Session, Subject (centered)
+  await drawText(page, `Session - ${session}`, getCenteredX(`Session - ${session}`, 26, timesRomanFont, pageWidth), yPositions.sessionY, 26, [0, 0, 0], timesRomanFont);
+  await drawText(page, subject, getCenteredX(subject, subjectFontSize, timesRomanBoldFont, pageWidth), yPositions.subjectY, subjectFontSize, [61, 104, 180], timesRomanBoldFont);
+  await drawText(page, branch, getCenteredX(branch, branchFontSize, timesRomanFont, pageWidth), yPositions.branchY, branchFontSize, [255, 0, 0], timesRomanFont);
+  await drawText(page, `${yearSem}`, getCenteredX(yearSem, 24, timesRomanFont, pageWidth), yPositions.yearSemY, 24, [255, 0, 0], timesRomanFont);
 
   // Teacher (left aligned)
   await drawText(page, `${teacher}`, 20, yPositions.teacherY, 23, [0, 0, 0], timesRomanFont);
 
-  // Branch, Year & Sem, Session (centered)
-  await drawText(page, `${branch}`, getCenteredX(branch, 28, timesRomanFont, pageWidth), yPositions.branchY, 28, [255, 0, 0], timesRomanFont);
-  await drawText(page, `${yearSem}`, getCenteredX(yearSem, 24, timesRomanFont, pageWidth), yPositions.yearSemY, 24, [255, 0, 0], timesRomanFont);
-  await drawText(page, `Session - ${session}`, getCenteredX(`Session - ${session}`, 26, timesRomanFont, pageWidth), yPositions.sessionY, 26, [0, 0, 0], timesRomanFont);
-
-  // Subject (centered and dynamically adjusted font size)
-  let subjectFontSize = 28;
-  let subjectTextWidth = timesRomanBoldFont.widthOfTextAtSize(subject, subjectFontSize);
-
-  while (subjectTextWidth > pageWidth - 40 && subjectFontSize > 10) {
-    subjectFontSize -= 1;
-    subjectTextWidth = timesRomanBoldFont.widthOfTextAtSize(subject, subjectFontSize);
-  }
-
-  await drawText(page, `${subject}`, getCenteredX(subject, subjectFontSize, timesRomanBoldFont, pageWidth), yPositions.subjectY, subjectFontSize, [61, 104, 180], timesRomanBoldFont);
+  // Student Name & Enrollment (right aligned)
+  await drawText(page, `${studentEnrollment}`, enrollmentX, yPositions.enrollmentY, 21, [0, 0, 0], timesRomanFont);
+  await drawText(page, `${studentName}`, nameX, yPositions.nameY, 23, [0, 0, 0], timesRomanFont);
 
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -119,3 +130,9 @@ const generateFrontPage = async () => {
   link.click();
   window.open(urlBlob);
 }
+
+
+
+
+
+

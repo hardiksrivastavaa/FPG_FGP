@@ -24,3 +24,16 @@ const drawText = async (page, text, x, y, size, color, font) => {
     font: font,
   });
 };
+
+// Helper Function to adjust font size based on text length and page width
+function adjustFontSize(text, font, pageWidth) {
+  let size = 28;
+  let width = font.widthOfTextAtSize(text, size);
+
+  while (width > pageWidth - 40 && size > 10) {
+    size--;
+    width = font.widthOfTextAtSize(text, size);
+  }
+
+  return size;
+}
