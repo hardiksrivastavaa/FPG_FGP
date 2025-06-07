@@ -81,10 +81,3 @@ form.addEventListener("submit", (e) => {
     });
 });
 
-
-// Close modal on outside click
-// window.addEventListener("click", (e) => {
-//     if (e.target === modal) {
-//         gsap.to(modalContent, hideModalAnimation);
-//     }
-// });

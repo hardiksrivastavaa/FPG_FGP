@@ -111,13 +111,6 @@ async function generateFrontPage() {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const urlBlob = URL.createObjectURL(blob);
-  // const downloadLink = document.getElementById("downloadLink");
-  // downloadLink.href = urlBlob;
-  // downloadLink.download = `${subject} - ${name}.pdf`;
-  // downloadLink.style.display = "block";
-  // downloadLink.innerText = "Download PDF";
-  // downloadLink.click();
-
   const link = document.createElement("a");
   link.href = urlBlob;
   link.download = `${subject} - ${name}.pdf`;
