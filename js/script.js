@@ -118,17 +118,13 @@ async function generateFrontPage() {
   // downloadLink.innerText = "Download PDF";
   // downloadLink.click();
 
-
-  // 👇 Auto-download
-  const tempLink = document.createElement("a");
-  tempLink.href = urlBlob;
-  tempLink.download = `${subject} - ${name}.pdf`;
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  document.body.removeChild(tempLink);
+  const link = document.createElement("a");
+  link.href = urlBlob;
+  link.download = `${subject} - ${name}.pdf`;
+  link.click();
 
   // 👇 Open in new tab
-  window.open(urlBlob, "_blank");
+  window.open(urlBlob);
 
 }
 
