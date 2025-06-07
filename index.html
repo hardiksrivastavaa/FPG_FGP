@@ -143,11 +143,12 @@
             </button>
 
             <!-- Feedback Form  -->
-            <h3 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 text-center">
-                Submit Your Feedback
-            </h3>
-            <hr class="mb-6" />
             <form id="feedbackForm" name="feedbackForm">
+                <h3 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 text-center">
+                    Submit Your Feedback
+                </h3>
+                <hr class="mb-6" />
+
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700 mb-2 font-semibold">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter Your Name"
@@ -178,13 +179,14 @@
 
             <!-- Thank You Message (initially hidden) -->
             <div id="thankYouMessage" class="hidden text-center">
-                <img src="./assets/logo.png" alt="FPG" class="w-45 h-42 border border-gray-300 rounded-full mx-auto shadow-md" />
+                <img src="./assets/logo.png" alt="FPG"
+                    class="w-45 h-42 mt-4 border border-gray-300 rounded-full mx-auto shadow-md" />
 
                 <h3 id="heading" class="text-2xl font-semibold text-green-600 mb-4 mt-6"></h3>
                 <p id="body" class="text-gray-700"></p>
                 <p id="subText" class="text-gray-600 mt-2"></p>
                 <button id="closeThankYou"
-                    class="mt-6 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
+                    class="mt-6 mb-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
                     Close
                 </button>
             </div>
