@@ -4,7 +4,7 @@ const modalContent = document.getElementById("feedbackCard");
 const closeBtn = document.getElementById("closeModal");
 const thankYouMessage = document.getElementById("thankYouMessage");
 const closeThankYouBtn = document.getElementById("closeThankYou");
-const form = document.forms["feedbackForm"];
+const feedbackForm = document.forms["feedbackForm"];
 const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
 
 
@@ -47,8 +47,8 @@ closeThankYouBtn.addEventListener("click", () => {
         ease: "power2.in",
         onComplete: () => {
             modal.classList.add("hidden");
-            form.reset();
-            form.classList.remove("hidden");
+            feedbackForm.reset();
+            feedbackForm.classList.remove("hidden");
             thankYouMessage.classList.add("hidden");
         },
     });
@@ -57,11 +57,11 @@ closeThankYouBtn.addEventListener("click", () => {
 // Form submit with silent Google Script POST
 const scriptURL = "https://script.google.com/macros/s/AKfycbwTjOig6S_11GS1_zcL0sMwuzxOBIlYgelsyd6vFgxIz3-e1SYctm75mk-DYwpKIQA_Xg/exec";
 
-form.addEventListener("submit", (e) => {
+feedbackForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     // Hide form, show thank-you message
-    form.classList.add("hidden");
+    feedbackForm.classList.add("hidden");
     closeBtn.classList.add("hidden");
     thankYouMessage.classList.remove("hidden");
 
@@ -75,7 +75,7 @@ form.addEventListener("submit", (e) => {
     // Submit silently
     fetch(scriptURL, {
         method: "POST",
-        body: new FormData(form),
+        body: new FormData(feedbackForm),
     }).catch((error) => {
         console.error("Submission Error!", error.message);
     });

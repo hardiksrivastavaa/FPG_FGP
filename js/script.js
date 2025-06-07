@@ -1,64 +1,70 @@
+const branchDropdown = document.getElementById("branch");
+const sessionDropdown = document.getElementById("session");
+const yearSemDropdown = document.getElementById("yearSem");
+const subjectDropdown = document.getElementById("subjects");
+const teacherDropdown = document.getElementById("teacher");
+const form = document.getElementById("frontPageForm");
 
 // Function to populate subjects dropdown based on selected branch and yearSem
-function populateSubjects() {
-  const branch = document.getElementById("branch").value;
-  const yearSem = document.getElementById("yearSem").value;
-  const subjectsDropdown = document.getElementById("subjects");
-
-  if (!(branch in subjectsData) || !(yearSem in subjectsData[branch])) {
-    updateDropdown(subjectsDropdown, []);
+const populateSubjects = () => {
+  if (!(branchDropdown.value in subjectsData) || !(yearSemDropdown.value in subjectsData[branchDropdown.value])) {
+    updateDropdown(subjectDropdown, []);
     return;
   }
-
-  const subjects = subjectsData[branch][yearSem];
-  updateDropdown(subjectsDropdown, subjects);
+  const subjects = subjectsData[branchDropdown.value][yearSemDropdown.value];
+  updateDropdown(subjectDropdown, subjects);
 }
 
 // Function to populate teacher dropdown based on selected branch
-function populateTeachers() {
-  const branch = document.getElementById("branch").value;
-  const teacherDropdown = document.getElementById("subjectTeacher");
-
-  if (!(branch in teachersData)) {
+const populateTeachers = () => {
+  if (!(branchDropdown.value in teachersData)) {
     updateDropdown(teacherDropdown, []);
     return;
   }
-
-  const teachers = teachersData[branch];
+  const teachers = teachersData[branchDropdown.value];
   updateDropdown(teacherDropdown, teachers);
 }
 
+// Function to handle dropdown change based on selected branch and yearSem
+const handleDropdownChange = () => {
+  populateSubjects();
+  populateTeachers();
+};
+
+// Event listener to submit form and generate front page PDF
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  let formData = {
+    branch: branchDropdown.value,
+    yearSem: yearSemDropdown.value,
+    subjects: subjectDropdown.value,
+    nameInput: document.getElementById("nameInput").value.trim()
+  };
+
+  generateFrontPage();
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbzKHTp21jc4HwsTI7JckJVJ30aC9FAuC82zQQhTHrjaTSvXP_P-s9yfBD6AKQjfodJXNg/exec",
+    {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    }
+  ).catch((error) => console.error("Error:", error));
+
+});
+
 // Function to generate front page PDF
-async function generateFrontPage() {
+const generateFrontPage = async () => {
 
-  const branchElement = document.getElementById("branch");
-  const sessionElement = document.getElementById("session");
-  const yearSemElement = document.getElementById("yearSem");
-  const teacherElement = document.getElementById("subjectTeacher");
-  const subjectElement = document.getElementById("subjects");
-  const name = document.getElementById("nameInput").value.trim();
-  const enrollment = document.getElementById("enrollmentInput").value.trim();
-
-  const requiredFields = [
-    branchElement,
-    sessionElement,
-    yearSemElement,
-    teacherElement,
-    subjectElement,
-    name,
-  ];
-
-  const isEmpty = requiredFields.some(field => field.value === "");
-  if (isEmpty) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  const branch = branchElement.options[branchElement.selectedIndex].innerText;
-  const session = sessionElement.options[sessionElement.selectedIndex].innerText;
-  const yearSem = yearSemElement.options[yearSemElement.selectedIndex].innerText;
-  const teacher = teacherElement.options[teacherElement.selectedIndex].innerText;
-  const subject = subjectElement.options[subjectElement.selectedIndex].innerText;
+  const branch = branchDropdown.options[branchDropdown.selectedIndex].innerText;
+  const session = sessionDropdown.options[sessionDropdown.selectedIndex].innerText;
+  const yearSem = yearSemDropdown.options[yearSemDropdown.selectedIndex].innerText;
+  const teacher = teacherDropdown.options[teacherDropdown.selectedIndex].innerText;
+  const subject = subjectDropdown.options[subjectDropdown.selectedIndex].innerText;
+  const studentName = document.getElementById("nameInput").value.trim();
+  const studentEnrollment = document.getElementById("enrollmentInput").value.trim();
 
   const yPositions = {
     branchY: 265,
@@ -74,20 +80,16 @@ async function generateFrontPage() {
   const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
   const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
   const page = pdfDoc.getPage(0);
-  const timesRomanFont = await pdfDoc.embedFont(
-    PDFLib.StandardFonts.TimesRoman
-  );
-  const timesRomanBoldFont = await pdfDoc.embedFont(
-    PDFLib.StandardFonts.TimesRomanBold
-  );
+  const timesRomanFont = await pdfDoc.embedFont(PDFLib.StandardFonts.TimesRoman);
+  const timesRomanBoldFont = await pdfDoc.embedFont(PDFLib.StandardFonts.TimesRomanBold);
 
   const pageWidth = page.getWidth();
 
-  const nameX = pageWidth - timesRomanFont.widthOfTextAtSize(name, 23) - 20;
-  const enrollmentX = pageWidth - timesRomanFont.widthOfTextAtSize(enrollment, 21) - 20;
+  const nameX = pageWidth - timesRomanFont.widthOfTextAtSize(studentName, 23) - 20;
+  const enrollmentX = pageWidth - timesRomanFont.widthOfTextAtSize(studentEnrollment, 21) - 20;
 
-  await drawText(page, `${enrollment}`, enrollmentX, yPositions.enrollmentY, 21, [0, 0, 0], timesRomanFont);
-  await drawText(page, `${name}`, nameX, yPositions.nameY, 23, [0, 0, 0], timesRomanFont);
+  await drawText(page, `${studentEnrollment}`, enrollmentX, yPositions.enrollmentY, 21, [0, 0, 0], timesRomanFont);
+  await drawText(page, `${studentName}`, nameX, yPositions.nameY, 23, [0, 0, 0], timesRomanFont);
 
   // Teacher (left aligned)
   await drawText(page, `${teacher}`, 20, yPositions.teacherY, 23, [0, 0, 0], timesRomanFont);
@@ -113,57 +115,7 @@ async function generateFrontPage() {
   const urlBlob = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = urlBlob;
-  link.download = `${subject} - ${name}.pdf`;
+  link.download = `${subject} - ${studentName}.pdf`;
   link.click();
-
-  // 👇 Open in new tab
-  window.open(urlBlob);
-
+  // window.open(urlBlob);
 }
-
-// Event listeners to populate subjects and teachers dropdowns
-const elementsToWatch = [
-  "branch",
-  "yearSem",
-  "subjects",
-  "nameInput",
-  "session",
-  "subjectTeacher",
-];
-
-elementsToWatch.forEach((id) => {
-  document.getElementById(id).addEventListener("change", () => {
-    document.getElementById("downloadLink").style.display = "none";
-  });
-});
-
-document.getElementById("branch").addEventListener("change", () => {
-  populateSubjects();
-  populateTeachers();
-});
-
-document.getElementById("yearSem").addEventListener("change", populateSubjects);
-
-// Event listener for form submission data to google sheet
-
-document.getElementById("form").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  let formData = {
-    branch: document.getElementById("branch").value,
-    yearSem: document.getElementById("yearSem").value,
-    subjects: document.getElementById("subjects").value,
-    nameInput: document.getElementById("nameInput").value,
-  };
-
-  generateFrontPage();
-
-  fetch(
-    "https://script.google.com/macros/s/AKfycbzKHTp21jc4HwsTI7JckJVJ30aC9FAuC82zQQhTHrjaTSvXP_P-s9yfBD6AKQjfodJXNg/exec",
-    {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    }
-  ).catch((error) => console.error("Error:", error));
-});
