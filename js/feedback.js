@@ -7,34 +7,6 @@ const closeThankYouBtn = document.getElementById("closeThankYou");
 const feedbackForm = document.forms["feedbackForm"];
 const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
 
-const thankYouMessages = [
-    {
-        heading: "Thank you for your feedback! 🙌",
-        body: "We sincerely appreciate your input. It helps us improve and serve you better. ✅",
-        subText: "You may now continue using the FPG App. 🚀"
-    },
-    {
-        heading: "Thanks for taking the time! 📝",
-        body: "Your feedback has been recorded successfully. We're grateful for your support. 🤝",
-        subText: "Feel free to continue exploring FPG. 🌐"
-    },
-    {
-        heading: "Feedback submitted! ✔️",
-        body: "We value your thoughts and are always working to improve. Thanks again!",
-        subText: "You may now proceed with the FPG App. 💡"
-    },
-    {
-        heading: "Thanks for helping us grow! 🌱",
-        body: "Every bit of feedback matters. We're committed to making things better for you.",
-        subText: "FPG is ready when you are. 🚀"
-    },
-    {
-        heading: "Much appreciated! 🙏",
-        body: "Your opinion has been noted. Thanks for being a part of this journey!",
-        subText: "Go ahead and continue using the FPG App. 📱"
-    }
-];
-
 // Function to apply a random message
 const applyRandomThankYouMessage = () => {
     const randomMessage = thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
@@ -47,15 +19,15 @@ const applyRandomThankYouMessage = () => {
 
 // Show modal when page loads
 window.addEventListener("DOMContentLoaded", () => {
-    if (!hasSeenModal) {
+    // if (!hasSeenModal) {
         modal.classList.remove("hidden");
         gsap.fromTo(
             modalContent,
             { opacity: 0, scale: 0.85, y: -30 },
             { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }
         );
-        sessionStorage.setItem("feedbackModalSeen", "true");
-    }
+    //     sessionStorage.setItem("feedbackModalSeen", "true");
+    // }
 });
 
 // Modal close animation
