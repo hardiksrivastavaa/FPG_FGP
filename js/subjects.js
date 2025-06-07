@@ -1,6 +1,4 @@
-
 const subjectsData = {
-
   ME: {
     "1st - 1st": [
       "Communication Skills-I",
@@ -9,7 +7,7 @@ const subjectsData = {
       "Applied Chemistry",
       "Engineering Graphics",
       "Basics of Information Technology",
-      "Communication Skills in English"
+      "Communication Skills in English",
     ],
     "1st - 2nd": [
       "Applied Mathematics-II",
@@ -62,7 +60,7 @@ const subjectsData = {
       "Applied Chemistry",
       "Engineering Graphics",
       "Basics of Information Technology",
-      "Communication Skills in English"
+      "Communication Skills in English",
     ],
     "1st - 2nd": [
       "Applied Mathematics-II",
@@ -115,7 +113,7 @@ const subjectsData = {
       "Applied Chemistry",
       "Engineering Graphics",
       "Basics of Information Technology",
-      "Communication Skills in English"
+      "Communication Skills in English",
     ],
     "1st - 2nd": [
       "Applied Mathematics-II",
@@ -167,7 +165,7 @@ const subjectsData = {
       "Applied Chemistry",
       "Engineering Graphics",
       "Basics of Information Technology",
-      "Communication Skills in English"
+      "Communication Skills in English",
     ],
     "1st - 2nd": [
       "Applied Mathematics-II",
@@ -220,7 +218,7 @@ const subjectsData = {
       "Applied Chemistry",
       "Engineering Graphics",
       "Basics of Information Technology",
-      "Communication Skills in English"
+      "Communication Skills in English",
     ],
     "1st - 2nd": [
       "Applied Mathematics-II",
@@ -254,13 +252,13 @@ const subjectsData = {
     ],
     "3rd - 5th": [
       "Industrial Management & Entrepreneurship Development",
-"Minor Project",
+      "Minor Project",
       "Microprocessor & Peripheral Devices",
       "Industrial Control",
       "Signal Transmission Recording and Display",
       "Programming in C",
-"Summer Training - Modern Rail Coach Factory",
-"Summer Training",
+      "Summer Training - Modern Rail Coach Factory",
+      "Summer Training",
     ],
     "3rd - 6th": [
       "Process Control",
