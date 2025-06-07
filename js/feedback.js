@@ -7,6 +7,43 @@ const closeThankYouBtn = document.getElementById("closeThankYou");
 const feedbackForm = document.forms["feedbackForm"];
 const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
 
+const thankYouMessages = [
+    {
+        heading: "Thank you for your feedback! 🙌",
+        body: "We sincerely appreciate your input. It helps us improve and serve you better. ✅",
+        subText: "You may now continue using the FPG App. 🚀"
+    },
+    {
+        heading: "Thanks for taking the time! 📝",
+        body: "Your feedback has been recorded successfully. We're grateful for your support. 🤝",
+        subText: "Feel free to continue exploring FPG. 🌐"
+    },
+    {
+        heading: "Feedback submitted! ✔️",
+        body: "We value your thoughts and are always working to improve. Thanks again!",
+        subText: "You may now proceed with the FPG App. 💡"
+    },
+    {
+        heading: "Thanks for helping us grow! 🌱",
+        body: "Every bit of feedback matters. We're committed to making things better for you.",
+        subText: "FPG is ready when you are. 🚀"
+    },
+    {
+        heading: "Much appreciated! 🙏",
+        body: "Your opinion has been noted. Thanks for being a part of this journey!",
+        subText: "Go ahead and continue using the FPG App. 📱"
+    }
+];
+
+// Function to apply a random message
+const applyRandomThankYouMessage = () => {
+    const randomMessage = thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
+
+    document.getElementById("heading").textContent = randomMessage.heading;
+    document.getElementById("body").textContent = randomMessage.body;
+    document.getElementById("subText").textContent = randomMessage.subText;
+}
+
 
 // Show modal when page loads
 window.addEventListener("DOMContentLoaded", () => {
@@ -59,6 +96,8 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbwTjOig6S_11GS1_zcL0s
 
 feedbackForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    applyRandomThankYouMessage();
 
     // Hide form, show thank-you message
     feedbackForm.classList.add("hidden");
