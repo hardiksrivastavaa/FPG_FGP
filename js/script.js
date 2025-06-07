@@ -118,20 +118,18 @@ async function generateFrontPage() {
   // downloadLink.innerText = "Download PDF";
   // downloadLink.click();
 
-  // Auto-trigger download
+
+  // 👇 Auto-download
   const tempLink = document.createElement("a");
   tempLink.href = urlBlob;
   tempLink.download = `${subject} - ${name}.pdf`;
-
-  // Append to body (required for Firefox)
   document.body.appendChild(tempLink);
-
-  // Simulate click
   tempLink.click();
-
-  // Remove the link after triggering download
   document.body.removeChild(tempLink);
-  
+
+  // 👇 Open in new tab
+  window.open(urlBlob, "_blank");
+
 }
 
 // Event listeners to populate subjects and teachers dropdowns
