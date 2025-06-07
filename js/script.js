@@ -117,5 +117,5 @@ const generateFrontPage = async () => {
   link.href = urlBlob;
   link.download = `${subject} - ${studentName}.pdf`;
   link.click();
-  // window.open(urlBlob);
+  window.open(urlBlob);
 }
