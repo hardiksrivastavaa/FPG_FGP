@@ -9,9 +9,7 @@ const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
 
 // Function to apply a random message
 const applyRandomThankYouMessage = () => {
-    const randomMessage =
-        thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
-
+    const randomMessage = thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
     document.getElementById("heading").textContent = randomMessage.heading;
     document.getElementById("body").textContent = randomMessage.body;
     document.getElementById("subText").textContent = randomMessage.subText;
