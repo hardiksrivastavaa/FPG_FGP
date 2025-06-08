@@ -139,8 +139,49 @@
                 &times;
             </button>
 
-            <!-- Feedback Form  -->
-            <form id="feedbackForm" name="feedbackForm">
+            <!-- 👋 Intro Section -->
+            <div id="introSection" class="text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-6">Front Page Generator - FGP </h2>
+
+                <hr class="mb-6" />
+
+                <p class="text-gray-700 text-justify">
+                    Hey there! Welcome to <strong>Front Page Generator</strong> — a dedicated tool built exclusively
+                    for the students of
+                    <strong>Feroze Gandhi Polytechnic</strong>.
+                    If you're tired of wasting time manually formatting front pages for your academic practical files,
+                    you're in the right place.
+                    This tool simplifies the process and helps you create clean, personalized front pages within
+                    seconds.
+                </p>
+
+                <p class="text-gray-700 text-justify mt-3">
+                    Select your branch, session, semester, subject, and teacher, enter your name — and boom! Your front page is ready to download.
+                </p>
+
+                <p class="text-gray-700 text-justify mt-3 mb-6">
+                    No matter your branch at FGP, this tool is designed to work for you. It’s fast,
+                    intuitive, and gets the job done efficiently.
+                </p>
+
+                <hr class="mb-3" />
+
+                <p class="text-gray-600 mt-4 text-sm text-center">
+                    Already trusted by <span class="font-semibold">500+ students</span> of FGP — thank you for being
+                    part of it! 🙏<br /> 
+                    I’d love to hear what you think. Your feedback helps shape the next version of this tool!
+                </p>
+
+                <button id="showFeedbackForm" onclick="showFeedbackForm()"
+                    class="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all">
+                    Give Feedback
+                </button>
+            </div>
+
+
+
+            <!-- Feedback Form Section (Initially Hidden) -->
+            <form id="feedbackFormSection" name="feedbackForm" class="hidden mt-4">
                 <h3 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 text-center">
                     Submit Your Feedback
                 </h3>
@@ -168,17 +209,17 @@
                 </div>
 
                 <div class="flex justify-center pt-2">
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-1/4">
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all w-1/3">
                         Submit
                     </button>
                 </div>
             </form>
 
-            <!-- Thank You Message (initially hidden) -->
+            <!-- ✅ Thank You Message (Initially Hidden) -->
             <div id="thankYouMessage" class="hidden text-center">
                 <img src="./assets/logo.png" alt="FPG"
                     class="w-45 h-42 mt-4 border border-gray-300 rounded-full mx-auto shadow-md" />
-
                 <h3 id="heading" class="text-2xl font-semibold text-green-600 mb-4 mt-6"></h3>
                 <p id="body" class="text-gray-700"></p>
                 <p id="subText" class="text-gray-600 mt-2"></p>
@@ -189,6 +230,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Developer Modal -->
     <div id="developerModal"

@@ -15,6 +15,7 @@ No matter which department you're in or what your major is here at Feroze Gandhi
 - **PDF Generation:** With just a click of a button, generate a downloadable PDF version of your customized front page.
 - **User-Friendly Interface:** Navigate through the process effortlessly with our intuitive interface.
 
+
 ## How to Use
 
 Here's how it works:
