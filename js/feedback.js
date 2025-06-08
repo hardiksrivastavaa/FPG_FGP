@@ -1,11 +1,21 @@
 // Modal Elements
 const modal = document.getElementById("feedbackModal");
+const introSection = document.getElementById("introSection");
+const feedbackFormSection = document.getElementById("feedbackFormSection")
 const modalContent = document.getElementById("feedbackCard");
 const closeBtn = document.getElementById("closeModal");
 const thankYouMessage = document.getElementById("thankYouMessage");
 const closeThankYouBtn = document.getElementById("closeThankYou");
 const feedbackForm = document.forms["feedbackForm"];
 const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
+
+
+const showFeedbackForm = () => {
+    introSection.classList.add("hidden");
+    closeBtn.classList.remove("hidden");
+    feedbackFormSection.classList.remove("hidden");
+}
+
 
 // Function to apply a random message
 const applyRandomThankYouMessage = () => {
@@ -19,6 +29,7 @@ const applyRandomThankYouMessage = () => {
 window.addEventListener("DOMContentLoaded", () => {
     if (!hasSeenModal) {
         modal.classList.remove("hidden");
+        closeBtn.classList.add("hidden");
         gsap.fromTo(
             modalContent,
             { opacity: 0, scale: 0.85, y: -30 },
