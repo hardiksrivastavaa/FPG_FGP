@@ -142,42 +142,37 @@
                 &times;
             </button>
 
-            <!-- 👋 Intro Section -->
             <div id="introSection" class="text-center">
                 <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-6">Front Page Generator</h2>
 
                 <hr class="mb-6" />
 
                 <p class="text-gray-700 text-justify">
-                    Hey there! Welcome to <strong>Front Page Generator</strong> — a dedicated tool made for
-                    <strong>Feroze Gandhi Polytechnic</strong> students. If you're tired of formatting front pages
-                    manually,
-                    this tool makes it quick and easy. Just enter your details and generate a clean, personalized front
-                    page in seconds.
-                    No matter your branch, it’s built to work for you — fast, intuitive, and efficient.
+                    Welcome to <strong>Front Page Generator</strong> — a quick and easy tool for
+                    <strong>Feroze Gandhi Polytechnic</strong> students to create clean, ready-to-download front pages
+                    for practical files.
+                    It works for every branch and gets the job done in seconds.
                 </p>
 
-
                 <p class="text-gray-700 text-justify mt-3 mb-6">
-                    Select your branch, session, semester, subject, and teacher, enter your name — and boom! Your front
-                    page is ready to download.
+                    Just select your branch, session, semester, subject, and teacher, enter your name — and your front
+                    page is ready!
                 </p>
 
                 <hr class="mb-3" />
 
                 <p class="text-gray-600 mt-4 text-sm text-center">
-                    Already trusted by <span class="font-semibold">500+ students</span> of FGP — thank you for being
-                    part of it! 🙏<br />
-                    I’d love to hear what you think. Your feedback helps shape the next version of this tool!
+                    Used by <span class="font-semibold">500+ FGP students</span> — thank you for the love! 🙏<br />
+                    Drop your feedback to help us make it even better.
                 </p>
 
                 <button id="showFeedbackForm" onclick="showFeedbackForm()"
                     class="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all">
                     Give Feedback
                 </button>
+
+
             </div>
-
-
 
             <!-- Feedback Form Section (Initially Hidden) -->
             <form id="feedbackFormSection" name="feedbackForm" class="hidden mt-4">
@@ -187,22 +182,23 @@
                 <hr class="mb-6" />
 
                 <div class="mb-4">
-                    <label for="name" class="block text-gray-700 mb-2 font-semibold">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter Your Name"
+                    <label for="feedbackName" class="block text-gray-700 mb-2 font-semibold">Your Name</label>
+                    <input type="text" id="feedbackName" name="feedbackName" placeholder="Enter Your Name"
                         class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-300 focus:border-indigo-600 transition-all duration-300 ease-in-out outline-none focus:shadow-[0_0_10px_#4f46e5]"
                         required />
                 </div>
 
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 mb-2 font-semibold">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Your Email"
+                    <label for="feedbackEmail" class="block text-gray-700 mb-2 font-semibold">Your Email</label>
+                    <input type="email" id="feedbackEmail" name="feedbackEmail" placeholder="Enter Your Email"
                         class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-300 focus:border-indigo-600 transition-all duration-300 ease-in-out outline-none focus:shadow-[0_0_10px_#4f46e5]"
                         required />
                 </div>
 
                 <div class="mb-4">
-                    <label for="message" class="block text-gray-700 mb-2 font-semibold">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Type your feedback here..."
+                    <label for="feedbackMessage" class="block text-gray-700 mb-2 font-semibold">Message</label>
+                    <textarea id="feedbackMessage" name="feedbackMessage" rows="4"
+                        placeholder="Type your feedback here..."
                         class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-300 focus:border-indigo-600 transition-all duration-300 ease-in-out outline-none focus:shadow-[0_0_10px_#4f46e5]"
                         required></textarea>
                 </div>
@@ -227,7 +223,12 @@
                     Close
                 </button>
             </div>
+
         </div>
+
+
+
+    </div>
     </div>
 
 
