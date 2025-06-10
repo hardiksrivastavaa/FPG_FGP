@@ -97,7 +97,9 @@ feedbackForm.addEventListener("submit", (e) => {
         institute: "FGP"
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbxOyLHaLyk_Wc398lfaGto2lThLaYZq_MwFODOG2ZrpBARBxoPORO2-Zmhqwys8thqMew/exec",
+    const url = "https://script.google.com/macros/s/AKfycbypEOWF8Drt-zS2HlWdttUnXx8WNpfo0lCCrLsyG43vhHJi_Sl4HCukFfuwA1_GtvmUCw/exec";
+
+    fetch(url ,
         {
             method: "POST",
             mode: "no-cors",
