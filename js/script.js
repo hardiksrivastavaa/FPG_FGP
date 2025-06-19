@@ -194,12 +194,12 @@ const generateFrontPage = async () => {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const urlBlob = URL.createObjectURL(blob);
-//  downloadBtn.classList.remove("hidden");
-//  generateBtn.classList.add("hidden");
+  //  downloadBtn.classList.remove("hidden");
+  //  generateBtn.classList.add("hidden");
   downloadBtn.href = urlBlob;
   downloadBtn.download = `${subject} - ${studentName}.pdf`;
   downloadBtn.click();
-//  window.open(urlBlob);
+  window.open(urlBlob);
 };
 
 // form.addEventListener("change", () => {
