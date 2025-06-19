@@ -124,11 +124,10 @@ const generateFrontPage = async () => {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const urlBlob = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+  const link = document.getElementById("download-pdf");
   link.href = urlBlob;
   link.download = `${subject} - ${studentName}.pdf`;
   link.click();
-  window.open(urlBlob);
 }
 
 
