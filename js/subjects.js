@@ -265,6 +265,9 @@ const subjectsData = {
       "Specialised Instruments",
       "Robotics",
       "Neural Networks",
+      "Major Project",
+      "Project Work",
+      "Project"
     ],
   },
 
