@@ -58,8 +58,12 @@
                     <option value="CSE">Computer Science & Engineering</option>
                     <option value="IT">Information Technology</option>
                     <option value="IC">Instrumentation & Control</option>
-                    <option value="MOM">Modern Office Management and Secretarial Practice</option>
-                    <option value="PGDCA">Post Graduate Diploma in Computer Application</option>
+                    <option value="MOM">
+                        Modern Office Management and Secretarial Practice
+                    </option>
+                    <option value="PGDCA">
+                        Post Graduate Diploma in Computer Application
+                    </option>
                 </select>
             </div>
 
@@ -137,7 +141,13 @@
             </div>
 
             <footer class="mt-8 text-center text-black-800 border-t border-gray-300 pt-4 text-sm font-semibold">
-                <p>
+                <p class="mt-2">
+                    <a href="#" id="openFeedbackModal"
+                        class="text-[17px] text-black-800 hover:text-blue-800 hover:underline">
+                        Give Feedback
+                    </a>
+                </p>
+                <p class="mt-2">
                     Developed with ❤️ by
                     <a href="#" id="openDevModal" class="text-blue-700 hover:underline">Hardik Srivastava</a>
                 </p>
@@ -145,71 +155,54 @@
         </form>
     </div>
 
-    <!-- Feedback Modal -->
-    <div id="feedbackModal"
+    <!-- Intro Modal -->
+    <div id="IntroModal"
         class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 hidden">
-        <div id="feedbackCard" class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-xl relative">
-            <!-- Close Button -->
-            <button id="closeModal" class="absolute top-1 right-2 text-gray-600 hover:text-gray-900 text-4xl">
-                &times;
-            </button>
-
-            <div id="introSection" class="text-center">
-                
-                <h2 class="text-2xl font-bold text-blue-800 mb-3 mt-6">Front Page Generator</h2>
+        <div id="introCard" class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-xl relative">
+            <div id="introCard" class="text-center">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3 mt-6">
+                    Front Page Generator
+                </h2>
 
                 <hr class="mb-6" />
 
                 <p class="text-gray-800 text-justify p-4 rounded-lg shadow-md border border-gray-200">
-                    Welcome to <strong class="text-blue-600">Front Page Generator</strong> — a quick and easy tool for
-                    <strong class="text-green-600">Feroze Gandhi Polytechnic</strong> students
-                    to create clean,
-                    ready-to-download front pages for practical files.
-                    It works for every branch and gets the job done in seconds.
+                    Welcome to
+                    <strong class="text-blue-600">Front Page Generator</strong> — a
+                    quick and easy tool for
+                    <strong class="text-green-600">Feroze Gandhi Polytechnic</strong>
+                    students to create clean, ready-to-download front pages for
+                    practical files. It works for every branch and gets the job done in
+                    seconds.
                 </p>
 
                 <!-- <hr class="mb-3 border-gray-300" /> -->
 
                 <p class="text-gray-600 mt-4 text-sm text-center p-3 rounded-lg shadow-md border border-gray-200">
-                    <strong class="text-purple-600">Trusted by More than 500+ students!</strong> <br> Thank you for the
-                    love!
-                    🙏<br />
-                    Drop your feedback to help us make it even better.
+                    <strong class="text-purple-600">Trusted by More than 500+ students!</strong>
+                    <br />
+                    Thank you for the love! 🙏
                 </p>
 
-                <!-- <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-6">Front Page Generator</h2>
-
-                <hr class="mb-6" />
-
-                <p class="text-gray-700 text-justify">
-                    Welcome to <strong>Front Page Generator</strong> — a quick and easy tool for
-                    <strong>Feroze Gandhi Polytechnic</strong> students to create clean, ready-to-download front pages
-                    for practical files.
-                    It works for every branch and gets the job done in seconds.
-                </p>
-
-                <p class="text-gray-700 text-justify mt-3 mb-6">
-                    Just select your branch, session, semester, subject, and teacher, enter your name — and your front
-                    page is ready!
-                </p>
-
-                <hr class="mb-3" />
-
-                <p class="text-gray-600 mt-4 text-sm text-center">
-                    Used by <span class="font-semibold">500+ FGP students</span> — thank you for the love! 🙏<br />
-                    Drop your feedback to help us make it even better.
-                </p> -->
-
-                <button id="showFeedbackForm" onclick="showFeedbackForm()"
+                <button id="closeIntroModal"
                     class="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all">
-                    Give Feedback
+                    Close
                 </button>
-
-
             </div>
+        </div>
+    </div>
 
-            <!-- Feedback Form Section (Initially Hidden) -->
-            <form id="feedbackFormSection" name="feedbackForm" class="hidden mt-4">
+    <!-- Feedback Modal -->
+    <div id="feedbackModal"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 hidden">
+        <div id="feedbackCard" class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-xl relative">
+            <!-- Close Button -->
+            <button id="closeFeedbackModalBtn" class="absolute top-1 right-2 text-gray-600 hover:text-gray-900 text-4xl">
+                &times;
+            </button>
+
+            <!-- Feedback Form  -->
+            <form id="feedbackFormSection" name="feedbackForm" class="mt-4">
                 <h3 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 text-center">
                     Submit Your Feedback
                 </h3>
@@ -245,8 +238,8 @@
                 </div>
             </form>
 
-            <!-- ✅ Thank You Message (Initially Hidden) -->
-            <div id="thankYouMessage" class="hidden text-center">
+            <!-- Thank You Message (Initially Hidden) -->
+            <div id="thankYouMessageSection" class="hidden text-center">
                 <img src="./assets/logo.jpg" alt="FPG"
                     class="w-45 h-42 mt-4 border border-gray-300 rounded-full mx-auto shadow-md" />
                 <h3 id="heading" class="text-2xl font-semibold text-green-600 mb-4 mt-6"></h3>
@@ -257,14 +250,9 @@
                     Close
                 </button>
             </div>
-
+            
         </div>
-
-
-
     </div>
-    </div>
-
 
     <!-- Developer Modal -->
     <div id="developerModal"
@@ -302,7 +290,9 @@
     <!-- Error Modal -->
     <div id="errorModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
         <div class="bg-white p-6 rounded-xl shadow-lg text-center w-[90%] max-w-md">
-            <h2 class="text-2xl font-bold text-yellow-600 mb-2">Sorry for the Inconvenience</h2>
+            <h2 class="text-2xl font-bold text-yellow-600 mb-2">
+                Sorry for the Inconvenience
+            </h2>
             <p class="text-gray-700">
                 Something went wrong while generating the front page.<br />
                 We're working to fix this issue — please try again shortly.
@@ -314,9 +304,9 @@
         </div>
     </div>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="./js/helper.js"></script>
+    <script src="./js/intro.js"></script>
     <script src="./js/devinfo.js"></script>
     <script src="./js/thankyou.js"></script>
     <script src="./js/feedback.js"></script>

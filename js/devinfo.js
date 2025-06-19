@@ -1,15 +1,10 @@
-
-// Developer Information Modal
 const devModal = document.getElementById("developerModal");
 const devCard = document.getElementById("developerCard");
 const openDevModalBtn = document.getElementById("openDevModal");
 const closeDevModalBtn = document.getElementById("closeDevModal");
 
-// Open Modal
 openDevModalBtn.addEventListener("click", (e) => {
-  e.preventDefault();
   devModal.classList.remove("hidden");
-
   gsap.fromTo(
     devCard,
     { opacity: 0, scale: 0.8, y: -50 },
@@ -17,7 +12,6 @@ openDevModalBtn.addEventListener("click", (e) => {
   );
 });
 
-// Close Modal
 closeDevModalBtn.addEventListener("click", () => {
   gsap.to(devCard, {
     opacity: 0,
@@ -29,11 +23,4 @@ closeDevModalBtn.addEventListener("click", () => {
       devModal.classList.add("hidden");
     },
   });
-});
-
-// Close on click outside modal
-window.addEventListener("click", (e) => {
-  if (e.target === devModal) {
-    closeDevModalBtn.click();
-  }
 });

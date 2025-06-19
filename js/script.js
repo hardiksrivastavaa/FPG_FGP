@@ -133,6 +133,3 @@ const generateFrontPage = async () => {
 
 
 
-
-
-

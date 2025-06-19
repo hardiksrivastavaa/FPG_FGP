@@ -1,42 +1,19 @@
-// Modal Elements
-const modal = document.getElementById("feedbackModal");
-const introSection = document.getElementById("introSection");
-const feedbackFormSection = document.getElementById("feedbackFormSection")
-const modalContent = document.getElementById("feedbackCard");
-const closeBtn = document.getElementById("closeModal");
-const thankYouMessage = document.getElementById("thankYouMessage");
+const feedbackModal = document.getElementById("feedbackModal");
+const feedbackCard = document.getElementById("feedbackCard");
+const openFeedbackModalBtn = document.getElementById("openFeedbackModal");
+const closeFeedbackModalBtn = document.getElementById("closeFeedbackModalBtn");
+const feedbackFormSection = document.getElementById("feedbackFormSection");
+const thankYouMessageSection = document.getElementById("thankYouMessage");
 const closeThankYouBtn = document.getElementById("closeThankYou");
 const feedbackForm = document.forms["feedbackForm"];
-const hasSeenModal = sessionStorage.getItem("feedbackModalSeen");
 
-
-const showFeedbackForm = () => {
-    introSection.classList.add("hidden");
-    closeBtn.classList.remove("hidden");
-    feedbackFormSection.classList.remove("hidden");
-}
-
-
-// Function to apply a random message
-const applyRandomThankYouMessage = () => {
-    const randomMessage = thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
-    document.getElementById("heading").textContent = randomMessage.heading;
-    document.getElementById("body").textContent = randomMessage.body;
-    document.getElementById("subText").textContent = randomMessage.subText;
-};
-
-// Show modal when page loads
-window.addEventListener("DOMContentLoaded", () => {
-    if (!hasSeenModal) {
-        modal.classList.remove("hidden");
-        closeBtn.classList.add("hidden");
-        gsap.fromTo(
-            modalContent,
-            { opacity: 0, scale: 0.85, y: -30 },
-            { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }
-        );
-        sessionStorage.setItem("feedbackModalSeen", "true");
-    }
+openFeedbackModalBtn.addEventListener("click", (e) => {
+    feedbackModal.classList.remove("hidden");
+    gsap.fromTo(
+        feedbackCard,
+        { opacity: 0, scale: 0.8, y: -50 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }
+    );
 });
 
 // Modal close animation
@@ -47,27 +24,37 @@ const hideModalAnimation = {
     duration: 0.3,
     ease: "power2.in",
     onComplete: () => {
-        modal.classList.add("hidden");
+        feedbackModal.classList.add("hidden");
     },
 };
 
 // Manual close button
-closeBtn.addEventListener("click", () => {
-    gsap.to(modalContent, hideModalAnimation);
+closeFeedbackModalBtn.addEventListener("click", () => {
+    gsap.to(feedbackCard, hideModalAnimation);
 });
+
+// Function to apply a random message
+const applyRandomThankYouMessage = () => {
+    const randomMessage =
+        thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
+    document.getElementById("heading").textContent = randomMessage.heading;
+    document.getElementById("body").textContent = randomMessage.body;
+    document.getElementById("subText").textContent = randomMessage.subText;
+};
 
 // Close thank-you view and reset form
 closeThankYouBtn.addEventListener("click", () => {
-    gsap.to(thankYouMessage, {
+    gsap.to(thankYouMessageSection, {
         opacity: 0,
         y: -20,
         duration: 0.3,
         ease: "power2.in",
         onComplete: () => {
-            modal.classList.add("hidden");
             feedbackForm.reset();
-            feedbackForm.classList.remove("hidden");
-            thankYouMessage.classList.add("hidden");
+            feedbackModal.classList.add("hidden");
+            closeFeedbackModalBtn.classList.remove("hidden");
+            feedbackFormSection.classList.remove("hidden");
+            thankYouMessageSection.classList.add("hidden");
         },
     });
 });
@@ -75,17 +62,16 @@ closeThankYouBtn.addEventListener("click", () => {
 // Form submit with silent Google Script POST
 feedbackForm.addEventListener("submit", (e) => {
     e.preventDefault();
-
     applyRandomThankYouMessage();
 
     // Hide form, show thank-you message
-    feedbackForm.classList.add("hidden");
-    closeBtn.classList.add("hidden");
-    thankYouMessage.classList.remove("hidden");
+    feedbackFormSection.classList.add("hidden");
+    closeFeedbackModalBtn.classList.add("hidden");
+    thankYouMessageSection.classList.remove("hidden");
 
     // Animate thank you message in
     gsap.fromTo(
-        thankYouMessage,
+        thankYouMessageSection,
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
     );
@@ -94,18 +80,16 @@ feedbackForm.addEventListener("submit", (e) => {
         name: document.getElementById("feedbackName").value.trim(),
         email: document.getElementById("feedbackEmail").value.trim(),
         message: document.getElementById("feedbackMessage").value.trim(),
-        institute: "FGP"
+        institute: "FGP",
     };
 
-    const url = "https://script.google.com/macros/s/AKfycbypEOWF8Drt-zS2HlWdttUnXx8WNpfo0lCCrLsyG43vhHJi_Sl4HCukFfuwA1_GtvmUCw/exec";
+    const url =
+        "https://script.google.com/macros/s/AKfycbypEOWF8Drt-zS2HlWdttUnXx8WNpfo0lCCrLsyG43vhHJi_Sl4HCukFfuwA1_GtvmUCw/exec";
 
-    fetch(url ,
-        {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        }
-    ).catch((error) => console.error("Error:", error));
-
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+    }).catch((error) => console.error("Error:", error));
 });
