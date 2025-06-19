@@ -199,7 +199,7 @@ const generateFrontPage = async () => {
   downloadBtn.href = urlBlob;
   downloadBtn.download = `${subject} - ${studentName}.pdf`;
   //  downloadBtn.click();
-  // window.open(urlBlob);
+  window.open(urlBlob);
 };
 
 form.addEventListener("change", () => {
