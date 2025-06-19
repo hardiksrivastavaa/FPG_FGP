@@ -1,11 +1,14 @@
 const feedbackModal = document.getElementById("feedbackModal");
 const feedbackCard = document.getElementById("feedbackCard");
+
 const openFeedbackModalBtn = document.getElementById("openFeedbackModal");
 const closeFeedbackModalBtn = document.getElementById("closeFeedbackModalBtn");
+
 const feedbackFormSection = document.getElementById("feedbackFormSection");
-const thankYouMessageSection = document.getElementById("thankYouMessage");
-const closeThankYouBtn = document.getElementById("closeThankYou");
 const feedbackForm = document.forms["feedbackForm"];
+
+const thankYouMessageSection = document.getElementById("thankYouMessageSection");
+const closeThankYouBtn = document.getElementById("closeThankYou");
 
 openFeedbackModalBtn.addEventListener("click", (e) => {
     feedbackModal.classList.remove("hidden");
