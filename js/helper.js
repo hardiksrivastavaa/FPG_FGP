@@ -1,10 +1,41 @@
 // Helper function to update dropdown options
-function updateDropdown(dropdown, options) {
+// function updateDropdown(dropdown, options) {
+//   dropdown.innerHTML = '<option value="">Select</option>';
+//   options.forEach((item) => {
+//     const option = document.createElement("option");
+//     option.text = item;
+//     dropdown.add(option);
+//   });
+// }
+
+function updateDropdown(dropdown, items) {
   dropdown.innerHTML = '<option value="">Select</option>';
-  options.forEach((item) => {
+
+  // Add 'Others' option last with visual cue 
+  const othersOption = document.createElement("option");
+  othersOption.classList.add("text-red-800", "font-semibold");
+  othersOption.value = "others";
+  othersOption.textContent = "Others (Type Manually)";
+  dropdown.appendChild(othersOption);
+
+  // Add regular options
+  items.forEach(item => {
     const option = document.createElement("option");
-    option.text = item;
-    dropdown.add(option);
+    option.value = item;
+    option.textContent = item;
+    dropdown.appendChild(option);
+  });
+}
+
+function handleCustomInputToggle(dropdown, input) {
+  dropdown.addEventListener("change", () => {
+    if (dropdown.value === "others") {
+      input.classList.remove("hidden");
+      input.setAttribute("required", "required");
+    } else {
+      input.classList.add("hidden");
+      input.removeAttribute("required");
+    }
   });
 }
 

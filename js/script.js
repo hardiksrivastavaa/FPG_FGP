@@ -1,10 +1,11 @@
-const downloadBtn = document.getElementById("download-btn");
-const generateBtn = document.getElementById("generate-btn");
 const branchDropdown = document.getElementById("branch");
 const sessionDropdown = document.getElementById("session");
 const yearSemDropdown = document.getElementById("yearSem");
 const subjectDropdown = document.getElementById("subjects");
 const teacherDropdown = document.getElementById("teacher");
+const customSubject = document.getElementById("customSubject");
+const customTeacher = document.getElementById("customTeacher");
+const errorModal = document.getElementById("errorModal");
 const form = document.getElementById("frontPageForm");
 
 // Function to populate subjects dropdown based on selected branch and yearSem
@@ -36,13 +37,12 @@ const handleDropdownChange = () => {
   populateTeachers();
 };
 
-const showErrorModal = () => {
-  document.getElementById("errorModal").classList.remove("hidden");
-};
+handleCustomInputToggle(subjectDropdown, customSubject);
+handleCustomInputToggle(teacherDropdown, customTeacher);
 
 const closeErrorModal = () => {
-  document.getElementById("errorModal").classList.add("hidden");
-};
+  errorModal.classList.add("hidden");
+}
 
 // Event listener to submit form and generate front page PDF
 form.addEventListener("submit", async (e) => {
@@ -50,15 +50,17 @@ form.addEventListener("submit", async (e) => {
   let formData = {
     branch: branchDropdown.value,
     yearSem: yearSemDropdown.value,
-    subjects: subjectDropdown.value,
-    nameInput: document.getElementById("nameInput").value.trim(),
+    subjects: subjectDropdown.value === "others"
+      ? customSubject.value.trim()
+      : subjectDropdown.options[subjectDropdown.selectedIndex].innerText,
+    nameInput: document.getElementById("nameInput").value.trim()
   };
 
   try {
     await generateFrontPage();
   } catch (error) {
-    console.error("Front Page Generation Failed:", error);
-    showErrorModal();
+    console.log("Front Page Generation Failed:", error);
+    errorModal.classList.remove("hidden");
     return;
   }
 
@@ -76,18 +78,17 @@ form.addEventListener("submit", async (e) => {
 // Function to generate front page PDF
 const generateFrontPage = async () => {
   const branch = branchDropdown.options[branchDropdown.selectedIndex].innerText;
-  const session =
-    sessionDropdown.options[sessionDropdown.selectedIndex].innerText;
-  const yearSem =
-    yearSemDropdown.options[yearSemDropdown.selectedIndex].innerText;
-  const teacher =
-    teacherDropdown.options[teacherDropdown.selectedIndex].innerText;
-  const subject =
-    subjectDropdown.options[subjectDropdown.selectedIndex].innerText;
+  const session = sessionDropdown.options[sessionDropdown.selectedIndex].innerText;
+  const yearSem = yearSemDropdown.options[yearSemDropdown.selectedIndex].innerText;
   const studentName = document.getElementById("nameInput").value.trim();
-  const studentEnrollment = document
-    .getElementById("enrollmentInput")
-    .value.trim();
+  const studentEnrollment = document.getElementById("enrollmentInput").value.trim();
+  const subject = subjectDropdown.value === "others"
+    ? customSubject.value.trim()
+    : subjectDropdown.options[subjectDropdown.selectedIndex].innerText;
+  const teacher = teacherDropdown.value === "others"
+    ? customTeacher.value.trim()
+    : teacherDropdown.options[teacherDropdown.selectedIndex].innerText;
+
 
   const yPositions = {
     branchY: 265,
@@ -194,15 +195,10 @@ const generateFrontPage = async () => {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const urlBlob = URL.createObjectURL(blob);
-  //  downloadBtn.classList.remove("hidden");
-  //  generateBtn.classList.add("hidden");
-  downloadBtn.href = urlBlob;
-  downloadBtn.download = `${subject} - ${studentName}.pdf`;
-  downloadBtn.click();
+  const link = document.createElement("a");
+  link.href = urlBlob;
+  link.download = `${subject} - ${studentName}.pdf`;
+  link.click();
   window.open(urlBlob);
 };
 
-// form.addEventListener("change", () => {
-//   downloadBtn.classList.add("hidden");
-//   generateBtn.classList.remove("hidden");
-// });
